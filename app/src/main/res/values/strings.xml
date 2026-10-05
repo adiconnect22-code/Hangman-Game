@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">hang</string>
+    <string name="title_last_word">LAST WORD</string>
+    <string name="subtitle_consequence">EVERY MISTAKE HAS A CONSEQUENCE.</string>
+    <string name="identify_yourself">IDENTIFY YOURSELF</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_enter">ENTER</string>
+    <string name="sign_up_prompt">NO RECORD YET? SIGN UP HERE.</string>
+
+    <!-- Register Screen Strings -->
+    <string name="title_join_void">JOIN THE VOID</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_desired_username">Desired Username</string>
+    <string name="btn_bind_soul">BIND SOUL</string>
+    <string name="login_prompt">ALREADY SIGNED? RETURN TO LOGIN.</string>
+
+    <!-- Home Screen Strings -->
+    <string name="subtitle_save_them">CAN YOU SAVE THEM?</string>
+    <string name="btn_enter_void">ENTER THE VOID</string>
+    <string name="btn_soul_record">SOUL RECORD (PROFILE)</string>
+    <string name="btn_wall_of_kills">WALL OF KILLS (LEADERBOARD)</string>
+    <string name="btn_ritual_insight">RITUAL INSIGHT (HOW TO PLAY)</string>
+    <string name="btn_alter_environment">ALTER ENVIRONMENT (SETTINGS)</string>
+    <string name="active_subject_format">ACTIVE SUBJECT: %1$s</string>
+    <string name="stat_animals">ANIMALS: 0 SAVED | 0 SACRIFICED</string>
+    <string name="stat_adults">ADULTS: 0 SAVED | 0 MURDERED</string>
+    <string name="stat_children">CHILDREN: 0 SAVED | 0 LOST</string>
+
+    <!-- Settings / Alter Environment Strings -->
+    <string name="title_alter_environment">ALTER ENVIRONMENT</string>
+    <string name="option_music">AMBIENT ATMOSPHERE DRONE (MUSIC)</string>
+    <string name="option_sfx">TACTILE FEEDBACK TONES (SOUND EFFECTS)</string>
+    <string name="option_vibration">PULSE INDUCTION (VIBRATION)</string>
+    <string name="option_dark_theme">ABSOLUTE COLD DARK ROOMS (DARK THEME)</string>
+    <string name="btn_logout">SEVER SUBJECT SESSION (LOGOUT)</string>
+    <string name="btn_return_surface">RETURN TO SURFACE</string>
+
+    <!-- Ritual Insight / How To Play Strings -->
+    <string name="title_ritual_insight">RITUAL INSIGHT</string>
+    <string name="rules_header">THE RULES OF THE APPARITION:</string>
+    <string name="rule_1">1. YOU ARE HERE TO RESCUE A TRAPPED ESSENCE. CHOOSE YOUR DESTINATION TARGET WISELY: ANIMALS, OBJECTS, OR CELEBRITIES.</string>
+    <string name="rule_2">2. THE LEVELS DETERMINE THE SACRIFICE RISK. EASY TARGETS ANIMALS, INTERMEDIATE TARGETS AN UNKNOWN ADULT, AND HARD INVOKES A SILENT PSYCHOLOGICAL NURSERY NIGHTMARE WHERE AN INFANT\'S PRESENCE IS THREATENED.</string>
+
+    <!-- Leaderboard / Wall of Kills Strings -->
+    <string name="title_wall_of_kills">WALL OF KILLS</string>
+    <string name="subtitle_wall_of_kills">RANKED BY RITUAL RESONANCE.\nKILLS QUANTIFY FAIL STATUS.</string>
+
+    <!-- Profile / Soul Record Strings -->
+    <string name="title_soul_record">SOUL RECORD</string>
+    <string name="subject_id_format">SUBJECT ID: %1$s</string>
+    <string name="stat_rituals_performed">RITUALS PERFORMED: %1$d</string>
+    <string name="stat_essences_saved">ESSENCES SAVED: %1$d</string>
+    <string name="stat_victim_losses">VICTIM LOSSES: %1$d</string>
+    <string name="stat_stability_rate">STABILITY RATE: %1$d%%</string>
+    <string name="stat_highest_resonance">HIGHEST RESONANCE: %1$d</string>
+    <string name="stat_rescue_streak">RESCUE STREAK: %1$d</string>
+    <string name="header_unlocked_marks">UNLOCKED MARKS (ACHIEVEMENTS)</string>
+    <string name="no_marks_text">No marks etched upon this soul.</string>
+    <string name="leaderboard_row_format">%1$d. %2$s — Resonance: %3$d | Victim Losses: %4$d</string>
+
+    <!-- Choose Fate / Enter Void Strings -->
+    <string name="title_choose_fate">CHOOSE YOUR FATE</string>
+    <string name="header_select_category">SELECT CATEGORY</string>
+    <string name="cat_animals">ANIMALS</string>
+    <string name="cat_objects">OBJECTS</string>
+    <string name="cat_celebrities">CELEBRITIES</string>
+
+    <string name="header_select_difficulty">SELECT TARGET SACRIFICE (DIFFICULTY)</string>
+    <string name="diff_easy">EASY - ANIMAL SACRIFICE</string>
+    <string name="diff_intermediate">INTERMEDIATE - ADULT STRANGER</string>
+    <string name="diff_hard">HARD - INNOCENT CHILD (PSYCHOLOGICAL DREAD)</string>
+
+    <string name="header_select_mode">SELECT RITUAL MODE</string>
+    <string name="mode_classic">CLASSIC (ATTEMPTS LIMIT ONLY)</string>
+    <string name="mode_timer">TIMER MODE (TICKING DEATH)</string>
+
+    <string name="btn_enter_room">ENTER THE ROOM</string>
+
+    <!-- Game Strings -->
+    <string name="title_too_late">TOO LATE.</string>
+    <string name="title_saved">ESSENCE RESCUED!</string>
+    <string name="subtitle_too_late">I\'M GONE… BUT\nTHEY ARE STILL\nWAITING FOR YOU.</string>
+    <string name="subtitle_saved">A SOUL HAS BEEN\nSAVED FROM THE\nVOID.</string>
+    <string name="the_word_was_format">THE WORD WAS:\n%1$s</string>
+    <string name="btn_try_again">TRY AGAIN</string>
+    <string name="destination_format">DESTINATION:\n%1$s /\n%2$s</string>
+    <string name="tether_format">TETHER: %1$d</string>
+    <string name="remaining_format">REMAINING:\n%1$ds</string>
+</resources>

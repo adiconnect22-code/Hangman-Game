@@ -40,6 +40,11 @@ public class SoulRecordActivity extends AppCompatActivity {
         TextView tvHighestResonance = findViewById(R.id.tvHighestResonance);
         TextView tvRescueStreak = findViewById(R.id.tvRescueStreak);
 
+        SoulLineGraphView graphSoul = findViewById(R.id.graphSoul);
+        TextView tvCatAnimalsCount = findViewById(R.id.tvCatAnimalsCount);
+        TextView tvCatObjectsCount = findViewById(R.id.tvCatObjectsCount);
+        TextView tvCatCelebritiesCount = findViewById(R.id.tvCatCelebritiesCount);
+
         Button btnReturnSurface = findViewById(R.id.btnReturnSurfaceSoul);
 
         // Fetch subject ID from Intent extra or SharedPreferences
@@ -63,6 +68,10 @@ public class SoulRecordActivity extends AppCompatActivity {
         int streak = isCurrentUser ? prefs.getInt("rescue_streak", 0) : 0;
         int stabilityRate = (rituals > 0) ? (saved * 100 / rituals) : 0;
 
+        int solvedAnimals = isCurrentUser ? prefs.getInt("solved_animals", 0) : (subjectId.equalsIgnoreCase("adi") ? 2 : 0);
+        int solvedObjects = isCurrentUser ? prefs.getInt("solved_objects", 0) : (subjectId.equalsIgnoreCase("adi") ? 1 : 0);
+        int solvedCelebrities = isCurrentUser ? prefs.getInt("solved_celebrities", 0) : (subjectId.equalsIgnoreCase("adi") ? 1 : 0);
+
         if (tvRitualsPerformed != null) {
             tvRitualsPerformed.setText(getString(R.string.stat_rituals_performed, rituals));
         }
@@ -85,6 +94,22 @@ public class SoulRecordActivity extends AppCompatActivity {
 
         if (tvRescueStreak != null) {
             tvRescueStreak.setText(getString(R.string.stat_rescue_streak, streak));
+        }
+
+        if (graphSoul != null) {
+            graphSoul.setGraphData(saved, victimLosses);
+        }
+
+        if (tvCatAnimalsCount != null) {
+            tvCatAnimalsCount.setText(getString(R.string.cat_animals_count, solvedAnimals));
+        }
+
+        if (tvCatObjectsCount != null) {
+            tvCatObjectsCount.setText(getString(R.string.cat_objects_count, solvedObjects));
+        }
+
+        if (tvCatCelebritiesCount != null) {
+            tvCatCelebritiesCount.setText(getString(R.string.cat_celebrities_count, solvedCelebrities));
         }
 
         if (btnReturnSurface != null) {

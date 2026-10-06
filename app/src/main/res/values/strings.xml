@@ -58,6 +58,11 @@
     <string name="header_unlocked_marks">UNLOCKED MARKS (ACHIEVEMENTS)</string>
     <string name="no_marks_text">No marks etched upon this soul.</string>
     <string name="leaderboard_row_format">%1$d. %2$s — Resonance: %3$d | Victim Losses: %4$d</string>
+    <string name="header_performance_graph">SOUL PERFORMANCE TRENDS</string>
+    <string name="header_category_breakdown">CATEGORY ESSENCES RESCUED</string>
+    <string name="cat_animals_count">ANIMALS\n%1$d SOLVED</string>
+    <string name="cat_objects_count">OBJECTS\n%1$d SOLVED</string>
+    <string name="cat_celebrities_count">CELEBRITIES\n%1$d SOLVED</string>
 
     <!-- Choose Fate / Enter Void Strings -->
     <string name="title_choose_fate">CHOOSE YOUR FATE</string>

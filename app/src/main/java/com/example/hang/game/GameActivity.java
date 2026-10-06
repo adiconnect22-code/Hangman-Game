@@ -285,6 +285,15 @@ public class GameActivity extends AppCompatActivity {
             int earnedPoints = 20 + (streak * 5);
             currentResonance += earnedPoints;
 
+            String catUpper = (category != null) ? category.toUpperCase() : "ANIMALS";
+            if (catUpper.contains("OBJECT")) {
+                editor.putInt("solved_objects", prefs.getInt("solved_objects", 0) + 1);
+            } else if (catUpper.contains("CELEBRITY") || catUpper.contains("CELEBRITIES")) {
+                editor.putInt("solved_celebrities", prefs.getInt("solved_celebrities", 0) + 1);
+            } else {
+                editor.putInt("solved_animals", prefs.getInt("solved_animals", 0) + 1);
+            }
+
             editor.putInt("essences_saved", essencesSaved);
             editor.putInt("rescue_streak", streak);
             editor.putInt("resonance", currentResonance);

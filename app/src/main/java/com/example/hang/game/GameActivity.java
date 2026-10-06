@@ -28,6 +28,7 @@ public class GameActivity extends AppCompatActivity {
 
     private HangmanCanvasView hangmanCanvas;
     private TextView tvWordBlanks;
+    private TextView tvWordHint;
     private TextView tvDestination;
     private TextView tvTether;
     private TextView tvRemaining;
@@ -36,7 +37,8 @@ public class GameActivity extends AppCompatActivity {
     private LinearLayout keyboardRow2;
     private LinearLayout keyboardRow3;
 
-    private String secretWord = "PELICAN";
+    private String secretWord = "GIRAFFE";
+    private String secretHint = "Long neck tall animal";
     private String category = "ANIMALS";
     private String difficulty = "EASY";
     private String mode = "CLASSIC";
@@ -64,6 +66,7 @@ public class GameActivity extends AppCompatActivity {
 
         hangmanCanvas = findViewById(R.id.hangmanCanvas);
         tvWordBlanks = findViewById(R.id.tvWordBlanks);
+        tvWordHint = findViewById(R.id.tvWordHint);
         tvDestination = findViewById(R.id.tvDestination);
         tvTether = findViewById(R.id.tvTether);
         tvRemaining = findViewById(R.id.tvRemaining);
@@ -86,7 +89,10 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        secretWord = WordBank.getRandomWord(category);
+        WordBank.WordHint pair = WordBank.getRandomWordHint(category);
+        secretWord = pair.word;
+        secretHint = pair.hint;
+
         setupUI();
         buildQwertyKeyboard();
 
@@ -103,6 +109,10 @@ public class GameActivity extends AppCompatActivity {
             String catShort = category.contains("-") ? category.split("-")[0].trim() : category;
             String diffShort = difficulty.contains("-") ? difficulty.split("-")[0].trim() : difficulty;
             tvDestination.setText(getString(R.string.destination_format, catShort.toUpperCase(), diffShort.toUpperCase()));
+        }
+
+        if (tvWordHint != null) {
+            tvWordHint.setText(getString(R.string.clue_format, secretHint));
         }
 
         updateTetherDisplay();

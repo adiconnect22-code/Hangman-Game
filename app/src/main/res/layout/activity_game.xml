@@ -12,13 +12,32 @@
     <com.example.hang.game.HangmanCanvasView
         android:id="@+id/hangmanCanvas"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="210dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Description / Question Hint -->
+    <TextView
+        android:id="@+id/tvWordHint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:letterSpacing="0.06"
+        android:textColor="@color/subtitle_grey"
+        android:textSize="14sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hangmanCanvas"
+        tools:text="CLUE: Long neck tall animal" />
 
     <!-- Word Blanks Display -->
     <TextView
@@ -26,6 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="serif"
         android:gravity="center"
@@ -37,7 +57,7 @@
         app:layout_constraintBottom_toTopOf="@id/keyboardContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hangmanCanvas"
+        app:layout_constraintTop_toBottomOf="@id/tvWordHint"
         tools:text="_ _ _ _ _ _ _" />
 
     <!-- Static QWERTY Keyboard -->

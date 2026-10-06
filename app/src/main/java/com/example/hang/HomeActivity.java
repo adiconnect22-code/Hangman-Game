@@ -33,20 +33,38 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
+        // Check & Update Daily Streak
+        DailyStreakActivity.checkAndUpdateDailyStreak(this);
+
         TextView tvActiveSubject = findViewById(R.id.tvActiveSubject);
+        TextView tvHomeStreakCount = findViewById(R.id.tvHomeStreakCount);
+        View btnStreakBadge = findViewById(R.id.btnStreakBadge);
+
         Button btnEnterVoid = findViewById(R.id.btnEnterVoid);
         Button btnSoulRecord = findViewById(R.id.btnSoulRecord);
         Button btnWallOfKills = findViewById(R.id.btnWallOfKills);
         Button btnRitualInsight = findViewById(R.id.btnRitualInsight);
         Button btnAlterEnvironment = findViewById(R.id.btnAlterEnvironment);
 
-        // Fetch username from SharedPreferences
+        // Fetch user preferences
         SharedPreferences prefs = getSharedPreferences(RegisterActivity.PREFS_NAME, Context.MODE_PRIVATE);
         String savedUsername = prefs.getString(RegisterActivity.KEY_USERNAME, "ADITHYA");
         String username = savedUsername.trim().isEmpty() ? "ADITHYA" : savedUsername.trim();
+        int currentStreak = prefs.getInt(DailyStreakActivity.KEY_DAILY_STREAK, 1);
 
         if (tvActiveSubject != null) {
             tvActiveSubject.setText(getString(R.string.active_subject_format, username.toUpperCase()));
+        }
+
+        if (tvHomeStreakCount != null) {
+            tvHomeStreakCount.setText(getString(R.string.home_streak_format, currentStreak));
+        }
+
+        if (btnStreakBadge != null) {
+            btnStreakBadge.setOnClickListener(v -> {
+                Intent intent = new Intent(HomeActivity.this, DailyStreakActivity.class);
+                startActivity(intent);
+            });
         }
 
         if (btnEnterVoid != null) {
@@ -83,6 +101,17 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                 startActivity(intent);
             });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences(RegisterActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        int currentStreak = prefs.getInt(DailyStreakActivity.KEY_DAILY_STREAK, 1);
+        TextView tvHomeStreakCount = findViewById(R.id.tvHomeStreakCount);
+        if (tvHomeStreakCount != null) {
+            tvHomeStreakCount.setText(getString(R.string.home_streak_format, currentStreak));
         }
     }
 }

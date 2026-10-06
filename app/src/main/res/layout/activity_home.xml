@@ -21,6 +21,34 @@
             android:paddingEnd="24dp"
             android:paddingBottom="24dp">
 
+            <!-- Top Right Fire Streak Badge -->
+            <LinearLayout
+                android:id="@+id/btnStreakBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_leaderboard_user_row"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvHomeStreakCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="#FF6600"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="🔥 1" />
+            </LinearLayout>
+
             <!-- Top Header -->
             <LinearLayout
                 android:id="@+id/homeHeader"
@@ -31,7 +59,7 @@
                 app:layout_constraintBottom_toTopOf="@id/buttonsContainer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnStreakBadge"
                 app:layout_constraintVertical_bias="0.4">
 
                 <TextView

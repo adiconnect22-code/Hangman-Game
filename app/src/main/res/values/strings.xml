@@ -87,4 +87,14 @@
     <string name="destination_format">DESTINATION:\n%1$s /\n%2$s</string>
     <string name="tether_format">TETHER: %1$d</string>
     <string name="remaining_format">REMAINING:\n%1$ds</string>
+    <string name="clue_format">CLUE: %1$s</string>
+
+    <!-- Daily Streak Strings -->
+    <string name="title_daily_streak">DAILY STREAK</string>
+    <string name="streak_count_format">🔥 %1$d DAY STREAK!</string>
+    <string name="stat_current_streak">🔥 CURRENT STREAK: %1$d DAYS</string>
+    <string name="stat_best_streak">BEST STREAK: %1$d DAYS</string>
+    <string name="streak_maintained_msg">Ritual maintained today. Return tomorrow to keep the flame alive!</string>
+    <string name="streak_lost_msg">The flame has died out! Complete a ritual today to reignite your streak.</string>
+    <string name="home_streak_format">🔥 %1$d</string>
 </resources>

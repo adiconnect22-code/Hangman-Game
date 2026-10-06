@@ -6,6 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -25,6 +28,7 @@ public class HangmanCanvasView extends View {
     private Paint textPaint;
     private Paint bloodPaint;
     private Paint puddlePaint;
+    private Paint wrongTextPaint;
 
     private int wrongGuesses = 0;
     private String atmosphereText = "THEY ARE STILL WAITING.";
@@ -36,6 +40,7 @@ public class HangmanCanvasView extends View {
     private ValueAnimator swayAnimator;
 
     private final List<BloodDrop> bloodDrops = new ArrayList<>();
+    private final List<BloodSplatter> splatters = new ArrayList<>();
     private final Random random = new Random();
     private boolean isBloodFalling = false;
     private float bloodPuddleWidth = 0f;
@@ -53,6 +58,20 @@ public class HangmanCanvasView extends View {
             this.speed = speed;
             this.radius = radius;
             this.alpha = 255;
+        }
+    }
+
+    private static class BloodSplatter {
+        float x;
+        float y;
+        float dripLength;
+        float radius;
+
+        BloodSplatter(float x, float y, float dripLength, float radius) {
+            this.x = x;
+            this.y = y;
+            this.dripLength = dripLength;
+            this.radius = radius;
         }
     }
 
@@ -93,6 +112,13 @@ public class HangmanCanvasView extends View {
         textPaint.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
         textPaint.setShadowLayer(10f, 0, 0, Color.parseColor("#880000"));
 
+        wrongTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        wrongTextPaint.setColor(Color.parseColor("#D31212"));
+        wrongTextPaint.setTextSize(48f);
+        wrongTextPaint.setLetterSpacing(0.12f);
+        wrongTextPaint.setTypeface(Typeface.create("serif", Typeface.BOLD));
+        wrongTextPaint.setShadowLayer(14f, 0, 0, Color.parseColor("#FF0000"));
+
         bloodPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         bloodPaint.setColor(Color.parseColor("#E50914"));
         bloodPaint.setStyle(Paint.Style.FILL);
@@ -120,6 +146,12 @@ public class HangmanCanvasView extends View {
     }
 
     public void setWrongGuesses(int wrongGuesses) {
+        if (wrongGuesses > this.wrongGuesses) {
+            vibratePhone(wrongGuesses);
+            spawnBloodSplatters();
+            setAtmosphereText("WRONG.");
+        }
+
         this.wrongGuesses = wrongGuesses;
         animateStep();
 
@@ -128,6 +160,54 @@ public class HangmanCanvasView extends View {
         } else {
             isBloodFalling = false;
             bloodPuddleWidth = 0f;
+        }
+    }
+
+    private void vibratePhone(int count) {
+        try {
+            Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+            if (v != null && v.hasVibrator()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    if (count >= 6) {
+                        // Heavy double-pulse vibration on final blood drip
+                        v.vibrate(VibrationEffect.createWaveform(new long[]{0, 250, 100, 350}, -1));
+                    } else {
+                        // Impact pulse on blood splatter
+                        v.vibrate(VibrationEffect.createOneShot(220, VibrationEffect.DEFAULT_AMPLITUDE));
+                    }
+                } else {
+                    if (count >= 6) {
+                        v.vibrate(new long[]{0, 250, 100, 350}, -1);
+                    } else {
+                        v.vibrate(220);
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private void spawnBloodSplatters() {
+        int width = getWidth();
+        int height = getHeight();
+        if (width <= 0 || height <= 0) return;
+
+        float pad = 40f;
+        float baseRight = width - pad;
+        float baseBottom = height - pad - 30f;
+        float topY = pad + 40f;
+        float poleX = pad + 80f;
+
+        // Spawn 3 to 5 scattered blood splatters in the empty area
+        int count = 3 + random.nextInt(3);
+        int idx = 0;
+        while (idx < count) {
+            float sx = poleX + random.nextFloat() * (baseRight - poleX - 100f);
+            float sy = topY + random.nextFloat() * (baseBottom - topY - 60f);
+            float length = 15f + random.nextFloat() * 25f;
+            float radius = 4f + random.nextFloat() * 5f;
+            splatters.add(new BloodSplatter(sx, sy, length, radius));
+            idx++;
         }
     }
 
@@ -213,9 +293,25 @@ public class HangmanCanvasView extends View {
         float nooseBottomY = topY + 60f;
         canvas.drawLine(beamRight, topY, beamRight, nooseBottomY, framePaint);
 
-        // Atmosphere Text
+        // Draw Scattered Blood Liquid Splatters on Wrong Guesses
+        for (BloodSplatter sp : splatters) {
+            canvas.drawCircle(sp.x, sp.y, sp.radius, bloodPaint);
+            // Dripping liquid line down
+            canvas.drawLine(sp.x, sp.y, sp.x, sp.y + sp.dripLength, bloodPaint);
+            // Small droplets around splatter
+            canvas.drawCircle(sp.x - sp.radius * 1.5f, sp.y - sp.radius, sp.radius * 0.5f, bloodPaint);
+            canvas.drawCircle(sp.x + sp.radius * 1.5f, sp.y + sp.dripLength, sp.radius * 0.6f, bloodPaint);
+        }
+
+        // Atmosphere / Wrong Text near bottom of frame
         if (atmosphereText != null && !atmosphereText.isEmpty()) {
-            canvas.drawText(atmosphereText, poleX + 20f, baseBottom - 20f, textPaint);
+            if ("WRONG.".equals(atmosphereText)) {
+                float textWidth = wrongTextPaint.measureText(atmosphereText);
+                float textX = (width - textWidth) / 2f;
+                canvas.drawText(atmosphereText, textX, baseBottom - 20f, wrongTextPaint);
+            } else {
+                canvas.drawText(atmosphereText, poleX + 20f, baseBottom - 20f, textPaint);
+            }
         }
 
         // Apply slight sway rotation centered at noose hook point

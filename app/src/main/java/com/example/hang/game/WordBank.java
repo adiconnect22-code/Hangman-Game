@@ -6,31 +6,67 @@ import java.util.Random;
 
 public class WordBank {
 
-    private static final Map<String, String[]> WORD_CATEGORIES = new HashMap<>();
+    public static class WordHint {
+        public final String word;
+        public final String hint;
+
+        public WordHint(String word, String hint) {
+            this.word = word;
+            this.hint = hint;
+        }
+    }
+
+    private static final Map<String, WordHint[]> WORD_CATEGORIES = new HashMap<>();
     private static final Random RANDOM = new Random();
 
     static {
-        WORD_CATEGORIES.put("ANIMALS", new String[]{
-                "PELICAN", "PANTHER", "DOLPHIN", "LEOPARD", "GIRAFFE",
-                "CHEETAH", "FALCON", "HAMSTER", "BUFFALO", "PENGUIN"
+        WORD_CATEGORIES.put("ANIMALS", new WordHint[]{
+                new WordHint("GIRAFFE", "Long neck tall animal"),
+                new WordHint("PELICAN", "Large water bird with a pouch beak"),
+                new WordHint("PANTHER", "Fierce dark wild big cat"),
+                new WordHint("DOLPHIN", "Intelligent ocean mammal that leaps"),
+                new WordHint("LEOPARD", "Spotted wild predator cat"),
+                new WordHint("CHEETAH", "Fastest land animal on earth"),
+                new WordHint("FALCON", "Swift predatory bird with sharp talons"),
+                new WordHint("HAMSTER", "Small rodent pet with cheek pouches"),
+                new WordHint("BUFFALO", "Large horned wild bovine mammal"),
+                new WordHint("PENGUIN", "Flightless aquatic bird in cold ice")
         });
-        WORD_CATEGORIES.put("OBJECTS", new String[]{
-                "LANTERN", "MIRROR", "COMPASS", "PENDULUM", "SCISSORS",
-                "WHISTLE", "TRUMPET", "PACKAGE", "PADLOCK", "CRYSTAL"
+
+        WORD_CATEGORIES.put("OBJECTS", new WordHint[]{
+                new WordHint("LANTERN", "Portable light source with a flame"),
+                new WordHint("MIRROR", "Reflective glass surface"),
+                new WordHint("COMPASS", "Navigation tool that points north"),
+                new WordHint("PENDULUM", "Hanging swinging weight"),
+                new WordHint("SCISSORS", "Cutting tool with two sharp blades"),
+                new WordHint("WHISTLE", "Small instrument making high sound"),
+                new WordHint("TRUMPET", "Brass musical wind instrument"),
+                new WordHint("PACKAGE", "Wrapped box or parcel"),
+                new WordHint("PADLOCK", "Detachable lock with a shackle"),
+                new WordHint("CRYSTAL", "Clear shiny mineral stone")
         });
-        WORD_CATEGORIES.put("CELEBRITIES", new String[]{
-                "EINSTEIN", "PICASSO", "BEETHOVEN", "CHAPLIN", "MOZART",
-                "DARWIN", "NEWTON", "TESLA", "DISNEY", "SHAKESPEARE"
+
+        WORD_CATEGORIES.put("CELEBRITIES", new WordHint[]{
+                new WordHint("EINSTEIN", "Physicist famous for theory of relativity"),
+                new WordHint("PICASSO", "Famous cubist painter"),
+                new WordHint("BEETHOVEN", "Deaf classical music composer"),
+                new WordHint("CHAPLIN", "Silent comedy movie icon"),
+                new WordHint("MOZART", "Child prodigy classical composer"),
+                new WordHint("DARWIN", "Scientist behind theory of evolution"),
+                new WordHint("NEWTON", "Scientist who discovered gravity"),
+                new WordHint("TESLA", "Inventor of alternating electric current"),
+                new WordHint("DISNEY", "Creator of Mickey Mouse and animations"),
+                new WordHint("SHAKESPEARE", "Famous English playwright and poet")
         });
     }
 
-    public static String getRandomWord(String category) {
+    public static WordHint getRandomWordHint(String category) {
         String key = getCategoryKey(category);
-        String[] bank = WORD_CATEGORIES.get(key);
+        WordHint[] bank = WORD_CATEGORIES.get(key);
         if (bank != null && bank.length > 0) {
             return bank[RANDOM.nextInt(bank.length)];
         }
-        return "PELICAN";
+        return new WordHint("GIRAFFE", "Long neck tall animal");
     }
 
     private static String getCategoryKey(String cat) {

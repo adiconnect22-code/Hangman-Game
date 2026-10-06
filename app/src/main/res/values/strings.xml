@@ -88,6 +88,8 @@
     <string name="tether_format">TETHER: %1$d</string>
     <string name="remaining_format">REMAINING:\n%1$ds</string>
     <string name="clue_format">CLUE: %1$s</string>
+    <string name="hint_button_text">💡 HINT</string>
+    <string name="hint_toast_format">💡 CLUE: %1$s</string>
 
     <!-- Daily Streak Strings -->
     <string name="title_daily_streak">DAILY STREAK</string>

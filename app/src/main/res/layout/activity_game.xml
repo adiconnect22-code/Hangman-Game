@@ -8,6 +8,35 @@
     android:background="@color/bg_black"
     tools:context=".game.GameActivity">
 
+    <!-- Lightbulb Hint Button (Top Right) -->
+    <LinearLayout
+        android:id="@+id/btnHintBulb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_leaderboard_user_row"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:paddingStart="12dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvHintBulbText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/hint_button_text"
+            android:textColor="#FFCC00"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <!-- Top Hangman Frame -->
     <com.example.hang.game.HangmanCanvasView
         android:id="@+id/hangmanCanvas"
@@ -34,10 +63,12 @@
         android:textColor="@color/subtitle_grey"
         android:textSize="14sp"
         android:textStyle="bold|italic"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hangmanCanvas"
-        tools:text="CLUE: Long neck tall animal" />
+        tools:text="CLUE: Long neck tall animal"
+        tools:visibility="visible" />
 
     <!-- Word Blanks Display -->
     <TextView

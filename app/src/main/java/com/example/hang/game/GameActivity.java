@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -75,6 +76,11 @@ public class GameActivity extends AppCompatActivity {
         keyboardRow2 = findViewById(R.id.keyboardRow2);
         keyboardRow3 = findViewById(R.id.keyboardRow3);
 
+        View btnHintBulb = findViewById(R.id.btnHintBulb);
+        if (btnHintBulb != null) {
+            btnHintBulb.setOnClickListener(v -> revealHint());
+        }
+
         // Read extras from ChooseFateActivity
         Intent intent = getIntent();
         if (intent != null) {
@@ -102,6 +108,17 @@ public class GameActivity extends AppCompatActivity {
             }
             startTimer();
         }
+    }
+
+    private void revealHint() {
+        if (tvWordHint != null) {
+            if (tvWordHint.getVisibility() != View.VISIBLE) {
+                tvWordHint.setAlpha(0f);
+                tvWordHint.setVisibility(View.VISIBLE);
+                tvWordHint.animate().alpha(1f).setDuration(300).start();
+            }
+        }
+        Toast.makeText(this, getString(R.string.hint_toast_format, secretHint), Toast.LENGTH_SHORT).show();
     }
 
     private void setupUI() {

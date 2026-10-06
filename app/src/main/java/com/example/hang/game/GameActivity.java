@@ -50,6 +50,10 @@ public class GameActivity extends AppCompatActivity {
     private int tetherCount = 6;
     private CountDownTimer timer;
 
+    private long gameStartTime;
+    private int gameTotalGuesses = 0;
+    private int gameCorrectGuesses = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +102,8 @@ public class GameActivity extends AppCompatActivity {
         WordBank.WordHint pair = WordBank.getRandomWordHint(category);
         secretWord = pair.word;
         secretHint = pair.hint;
+
+        gameStartTime = System.currentTimeMillis();
 
         setupUI();
         buildQwertyKeyboard();
@@ -211,9 +217,11 @@ public class GameActivity extends AppCompatActivity {
 
         guessedLetters.add(letter);
         keyButton.setEnabled(false);
+        gameTotalGuesses++;
 
         if (secretWord.indexOf(letter) >= 0) {
-            // Correct guess! Reveal letter on the blanks above!
+            // Correct guess!
+            gameCorrectGuesses++;
             keyButton.setBackgroundResource(R.drawable.bg_key_correct);
             updateWordBlanks();
 
@@ -268,6 +276,9 @@ public class GameActivity extends AppCompatActivity {
             timer.cancel();
         }
 
+        long gameDurationMs = System.currentTimeMillis() - gameStartTime;
+        float durationSec = gameDurationMs / 1000.0f;
+
         // Calculate and save scores in SharedPreferences
         SharedPreferences prefs = getSharedPreferences(RegisterActivity.PREFS_NAME, Context.MODE_PRIVATE);
         int rituals = prefs.getInt("rituals_performed", 0) + 1;
@@ -276,14 +287,36 @@ public class GameActivity extends AppCompatActivity {
         int currentResonance = prefs.getInt("resonance", 0);
         int streak = prefs.getInt("rescue_streak", 0);
 
+        int totalGuesses = prefs.getInt("total_guesses", 0) + gameTotalGuesses;
+        int correctGuesses = prefs.getInt("correct_guesses", 0) + gameCorrectGuesses;
+
+        int flawless = prefs.getInt("flawless_rescues", 0);
+        int critical = prefs.getInt("critical_rescues", 0);
+        float fastest = prefs.getFloat("fastest_rescue_sec", 0f);
+
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("rituals_performed", rituals);
+        editor.putInt("total_guesses", totalGuesses);
+        editor.putInt("correct_guesses", correctGuesses);
 
         if (won) {
             essencesSaved++;
             streak++;
             int earnedPoints = 20 + (streak * 5);
             currentResonance += earnedPoints;
+
+            if (wrongCount == 0) {
+                flawless++;
+                editor.putInt("flawless_rescues", flawless);
+            }
+            if (tetherCount == 1) {
+                critical++;
+                editor.putInt("critical_rescues", critical);
+            }
+
+            if (fastest == 0f || durationSec < fastest) {
+                editor.putFloat("fastest_rescue_sec", durationSec);
+            }
 
             String catUpper = (category != null) ? category.toUpperCase() : "ANIMALS";
             if (catUpper.contains("OBJECT")) {

@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Locale;
+
 public class SoulRecordActivity extends AppCompatActivity {
 
     public static final String EXTRA_SUBJECT_ID = "subject_id";
@@ -39,6 +41,13 @@ public class SoulRecordActivity extends AppCompatActivity {
         TextView tvStabilityRate = findViewById(R.id.tvStabilityRate);
         TextView tvHighestResonance = findViewById(R.id.tvHighestResonance);
         TextView tvRescueStreak = findViewById(R.id.tvRescueStreak);
+
+        TextView tvFlawlessRescues = findViewById(R.id.tvFlawlessRescues);
+        TextView tvCriticalRescues = findViewById(R.id.tvCriticalRescues);
+        TextView tvSalvationRate = findViewById(R.id.tvSalvationRate);
+
+        TextView tvFastestRescue = findViewById(R.id.tvFastestRescue);
+        TextView tvLetterPrecision = findViewById(R.id.tvLetterPrecision);
 
         SoulLineGraphView graphSoul = findViewById(R.id.graphSoul);
         TextView tvCatAnimalsCount = findViewById(R.id.tvCatAnimalsCount);
@@ -68,6 +77,14 @@ public class SoulRecordActivity extends AppCompatActivity {
         int streak = isCurrentUser ? prefs.getInt("rescue_streak", 0) : 0;
         int stabilityRate = (rituals > 0) ? (saved * 100 / rituals) : 0;
 
+        int flawless = isCurrentUser ? prefs.getInt("flawless_rescues", 0) : (subjectId.equalsIgnoreCase("adi") ? 2 : 0);
+        int critical = isCurrentUser ? prefs.getInt("critical_rescues", 0) : (subjectId.equalsIgnoreCase("adi") ? 1 : 0);
+        float fastestSec = isCurrentUser ? prefs.getFloat("fastest_rescue_sec", 0f) : (subjectId.equalsIgnoreCase("adi") ? 12.4f : 0f);
+
+        int totalGuesses = isCurrentUser ? prefs.getInt("total_guesses", 0) : (subjectId.equalsIgnoreCase("adi") ? 45 : 0);
+        int correctGuesses = isCurrentUser ? prefs.getInt("correct_guesses", 0) : (subjectId.equalsIgnoreCase("adi") ? 32 : 0);
+        int letterPrecision = (totalGuesses > 0) ? (correctGuesses * 100 / totalGuesses) : 0;
+
         int solvedAnimals = isCurrentUser ? prefs.getInt("solved_animals", 0) : (subjectId.equalsIgnoreCase("adi") ? 2 : 0);
         int solvedObjects = isCurrentUser ? prefs.getInt("solved_objects", 0) : (subjectId.equalsIgnoreCase("adi") ? 1 : 0);
         int solvedCelebrities = isCurrentUser ? prefs.getInt("solved_celebrities", 0) : (subjectId.equalsIgnoreCase("adi") ? 1 : 0);
@@ -94,6 +111,29 @@ public class SoulRecordActivity extends AppCompatActivity {
 
         if (tvRescueStreak != null) {
             tvRescueStreak.setText(getString(R.string.stat_rescue_streak, streak));
+        }
+
+        // Ritual Mastery & Efficiency
+        if (tvFlawlessRescues != null) {
+            tvFlawlessRescues.setText(getString(R.string.stat_flawless_rescues, flawless));
+        }
+
+        if (tvCriticalRescues != null) {
+            tvCriticalRescues.setText(getString(R.string.stat_critical_rescues, critical));
+        }
+
+        if (tvSalvationRate != null) {
+            tvSalvationRate.setText(getString(R.string.stat_salvation_rate, stabilityRate));
+        }
+
+        // Speed & Precision
+        if (tvFastestRescue != null) {
+            String fastestStr = (fastestSec > 0f) ? String.format(Locale.getDefault(), "%.1f s", fastestSec) : "N/A";
+            tvFastestRescue.setText(getString(R.string.stat_fastest_rescue, fastestStr));
+        }
+
+        if (tvLetterPrecision != null) {
+            tvLetterPrecision.setText(getString(R.string.stat_letter_precision, letterPrecision));
         }
 
         if (graphSoul != null) {

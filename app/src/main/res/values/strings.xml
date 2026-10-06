@@ -64,6 +64,16 @@
     <string name="cat_objects_count">OBJECTS\n%1$d SOLVED</string>
     <string name="cat_celebrities_count">CELEBRITIES\n%1$d SOLVED</string>
 
+    <!-- Ritual Mastery & Speed Metrics -->
+    <string name="header_ritual_mastery">RITUAL MASTERY &amp; EFFICIENCY</string>
+    <string name="stat_flawless_rescues">FLAWLESS RESCUES (0 ERRORS): %1$d</string>
+    <string name="stat_critical_rescues">CRITICAL RESCUES (LAST TETHER): %1$d</string>
+    <string name="stat_salvation_rate">SALVATION RATE: %1$d%%</string>
+
+    <string name="header_speed_precision">SPEED &amp; PRECISION</string>
+    <string name="stat_fastest_rescue">FASTEST RESCUE: %1$s</string>
+    <string name="stat_letter_precision">LETTER PRECISION: %1$d%%</string>
+
     <!-- Choose Fate / Enter Void Strings -->
     <string name="title_choose_fate">CHOOSE YOUR FATE</string>
     <string name="header_select_category">SELECT CATEGORY</string>

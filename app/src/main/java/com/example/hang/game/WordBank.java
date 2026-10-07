@@ -58,6 +58,19 @@ public class WordBank {
                 new WordHint("DISNEY", "Creator of Mickey Mouse and animations"),
                 new WordHint("SHAKESPEARE", "Famous English playwright and poet")
         });
+
+        WORD_CATEGORIES.put("PROFESSIONS", new WordHint[]{
+                new WordHint("DOCTOR", "Medical professional who heals sick patients"),
+                new WordHint("TEACHER", "Educator who guides students in school"),
+                new WordHint("ASTRONAUT", "Space traveler exploring the stars"),
+                new WordHint("ENGINEER", "Creator and builder of machines and bridges"),
+                new WordHint("LAWYER", "Legal expert who defends in court"),
+                new WordHint("PILOT", "Aviator who flies airplanes in the sky"),
+                new WordHint("POLICE", "Law enforcement protector of peace"),
+                new WordHint("SOLDIER", "Brave defender serving in military"),
+                new WordHint("NURSE", "Healthcare caregiver tending to patients"),
+                new WordHint("ARTIST", "Creative painter or sculptor of art")
+        });
     }
 
     public static WordHint getRandomWordHint(String category) {
@@ -77,6 +90,9 @@ public class WordBank {
             }
             if (upper.contains("CELEBRITY") || upper.contains("CELEBRITIES")) {
                 return "CELEBRITIES";
+            }
+            if (upper.contains("DOCTOR") || upper.contains("ADULT") || upper.contains("PROFESSION")) {
+                return "PROFESSIONS";
             }
         }
         return "ANIMALS";
